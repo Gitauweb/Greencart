@@ -2,16 +2,34 @@ import React, { useState } from "react";
 import { useAppContext } from "../context/AppContext";
 
 const Login = () => {
-  const { setShowUserLogin } = useAppContext();
+  const { setShowUserLogin, loginUser, registerUser, loading } = useAppContext();
 
   const [state, setState] = useState("login");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const onSubmitHandler = (e) => {
+  const onSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log({ name, email, password });
+
+    if (state === "login") {
+      if (!email || !password) {
+        alert("Please fill all fields");
+        return;
+      }
+      await loginUser(email, password);
+    } else {
+      if (!name || !email || !password) {
+        alert("Please fill all fields");
+        return;
+      }
+      await registerUser(name, email, password);
+    }
+
+    // Reset form
+    setName("");
+    setEmail("");
+    setPassword("");
   };
 
   return (
@@ -89,8 +107,11 @@ const Login = () => {
           </p>
         )}
 
-        <button className="bg-indigo-500 hover:bg-indigo-600 transition text-white w-full py-2 rounded-md">
-          {state === "register" ? "Create Account" : "Login"}
+        <button 
+          disabled={loading}
+          className="bg-indigo-500 hover:bg-indigo-600 transition text-white w-full py-2 rounded-md disabled:bg-gray-400 disabled:cursor-not-allowed"
+        >
+          {loading ? "Processing..." : state === "register" ? "Create Account" : "Login"}
         </button>
       </form>
     </div>

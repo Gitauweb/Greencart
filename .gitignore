@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+
+# Build and dist
+dist/
+build/
+.next/
+out/
+
+# IDE and editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.swn
+*.iml
+*.sublime-workspace
+*.sublime-project
+.DS_Store
+
+# Testing
+coverage/
+.nyc_output/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Server
+server.log
+.PM2
+
+# MongoDB
+mongodb-data/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
